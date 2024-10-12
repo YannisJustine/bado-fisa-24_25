@@ -1,0 +1,7 @@
+services:
+  app:
+    build:
+      context: ./src
+    container_name: apache
+    ports:
+      - "8080:80"

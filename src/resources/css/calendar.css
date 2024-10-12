@@ -1,0 +1,5 @@
+.dark:root {
+    --fc-today-bg-color: rgba(218, 123, 51, 0.87);
+    --fc-today-border-color: rgba(0, 0, 0, 0.8);
+    --fc-page-bg-color: rgb(105, 110, 121);
+}
