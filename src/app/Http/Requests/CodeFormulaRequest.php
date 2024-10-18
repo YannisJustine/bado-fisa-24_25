@@ -22,9 +22,8 @@ class CodeFormulaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'candidat_id' => 'required|exists:candidats,id',
             'formule_id' => 'required|exists:formules_code,formule_id',
             'date_debut' => 'required|date|after_or_equal:today',
-        ];  
+        ];
     }
 }

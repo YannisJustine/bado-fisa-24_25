@@ -43,16 +43,6 @@
             <form class="space-y-6" action="{{ route('achat.formules.conduite') }}" method="POST">
         @endif
             <div>
-                <label for="candidat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Candidat</label>
-                <select @if($candidats->isEmpty()) disabled @endif name="candidat_id" id="candidat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-logo-orange-500 focus:border-logo-orange-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
-                    @forelse ($candidats as $candidat)
-                        <option title="{{ $candidat->email }}" value="{{ $candidat->id }}">{{ $candidat->fullnameage }}</option>
-                    @empty
-                        <option selected value disabled>Pas de candidat</option>
-                    @endforelse 
-                </select>
-            </div>
-            <div>
             @if($formule->isFormuleCode())
                 @if($formule->formuleCode->duree_validite != null)
                     <label for="datepickerId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date de début</label>
@@ -69,7 +59,6 @@
             <input type="hidden" name="formule_id" value="{{ $formule->id }}">
             @csrf
             <div class="flex items-center">
-                <a href="{{ route('register.candidat')  }}" class="text-sm font-medium text-logo-orange-500 dark:text-logo-orange-600 hover:underline">Créer un candidat</a>
                 <p class="text-xl ms-auto font-medium text-gray-900 dark:text-white start">{{ $formule->prix }}€</p>
             </div>
             <button type="submit" class="w-full text-white bg-logo-orange-700 hover:bg-logo-orange-800 focus:ring-4 focus:outline-none focus:ring-logo-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-logo-orange-600 dark:hover:bg-logo-orange-700 dark:focus:ring-logo-orange-800">Confirmer l'achat</button>

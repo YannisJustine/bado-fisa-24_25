@@ -20,12 +20,8 @@ class LoginRequest extends FormRequest
      */
     public function rules(): array
     {
-        $regexp = '/^(1|2)([0-9]{2})(0[1-9]|1[0-2])([0-9]{8})$/';
         return [
-            'num_secu' => [
-                            'required',
-                            'regex:' . $regexp,
-                        ],
+            'email' => ['required','exists:users,email','email'],
             'password' => 'required|string',
             'remember' => 'sometimes',
         ];

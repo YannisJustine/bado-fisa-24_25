@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CodeFormulaRequest;
 use App\Models\Candidat;
 use App\Models\FormuleCode;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CodeFormulaRequest;
 
 class FormuleCodeController extends Controller
 {
@@ -15,7 +16,7 @@ class FormuleCodeController extends Controller
         $validated = $request->validated();
 
         // Récupération du candidat et de la formule
-        $candidat = Candidat::find($validated["candidat_id"]);
+        $candidat = Auth::guard('candidat')->user();
         $formule_code = FormuleCode::find($validated["formule_id"]);
 
         // Si le candidat a déjà une formule de code illimité

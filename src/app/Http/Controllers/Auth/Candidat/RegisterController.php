@@ -16,7 +16,7 @@ class RegisterController extends Controller
     public function create(CreateApplicantRequest $request)
     {
         $validated = $request->validated();
-        Candidat::create([
+        $candidate = Candidat::create([
             'nom' => strtolower($validated['last_name']),
             'prenom' => strtolower($validated['first_name']),
             'email' => strtolower($validated['email']),
@@ -24,6 +24,7 @@ class RegisterController extends Controller
             'telephone' => $validated['phone'],
             'date_naissance' => $validated['birthday']
         ]);
+
 
         return redirect()->route('home')->with('success','Le candidat a bien été enregistré');
     }

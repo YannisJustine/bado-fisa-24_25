@@ -4,8 +4,10 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\TypePermis;
 use DateTime;
+use App\Models\User;
+use App\Models\Candidat;
+use App\Models\Vehicule;
 use Illuminate\Database\Seeder;
 use Database\Seeders\StatutSeeder;
 use Illuminate\Support\Facades\DB;
@@ -28,16 +30,16 @@ class DatabaseSeeder extends Seeder
         $this->call(FormuleConduiteSeeder::class);
         $this->call(FormuleCodeSeeder::class);
         $this->call(CreneauSeeder::class);
+        $this->call(RoleSeeder::class);
 
-        \App\Models\User::factory(3)->create();
-        \App\Models\Candidat::factory(10)->create();
-        \App\Models\Vehicule::factory(10)->create();
+        User::factory(3)->create();
+        Candidat::factory(10)->create();
+        Vehicule::factory(10)->create();
 
         $this->call(HoraireFormateurSeeder::class, false, ['number' => 100]);
         $this->call(HabilitationSeeder::class);
 
-        //\App\Models\Vehicule::factory(5)->create();
-
+        // Pour debug
         $queries = DB::getQueryLog();
         foreach ($queries as $query) {
             $sql = $query['query'];
@@ -53,9 +55,6 @@ class DatabaseSeeder extends Seeder
 
             Log::debug($sqlWithBindings);
         }
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+      
     }
 }

@@ -16,9 +16,7 @@
 
     @vite(['resources/js/app.js'])
     @yield('meta')
-
     <title>@yield('title')</title>
-
 	<script>
         if (localStorage.getItem('dark-mode') === 'true' || (!('dark-mode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');

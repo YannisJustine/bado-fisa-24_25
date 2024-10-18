@@ -22,6 +22,7 @@ class CandidatFactory extends Factory
             "telephone"=> $this->faker->phoneNumber(),
             "adresse" => $this->faker->address(),
             "date_naissance" => $this->faker->dateTimeBetween('-30 years', '-14 years'),
+            "password" => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi' // password
         ];
     }
 }

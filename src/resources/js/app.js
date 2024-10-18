@@ -6,12 +6,12 @@ import './bootstrap';
 import './dark'
 import '../css/app.css';
 import 'flowbite';
+
 import '../sass/app.sass';
 import Alpine from 'alpinejs'
 import { createApp } from 'vue/dist/vue.esm-bundler.js';
 import Calendar from './vue/Calendar.vue';
 import Planning from './vue/Planning.vue';
-import Spinner from './vue/Components/Spinner.vue';
 import Map from './vue/Components/Map.vue';
 
 const app = createApp()
@@ -71,7 +71,6 @@ if(document.getElementById('app')) {
     app.provide('StatutInfo', StatutInfo);
     app.component('Calendar', Calendar);
     app.component('Planning', Planning);
-    app.component('Spinner', Spinner);
     app.component('CustomMap', Map);
     app.mount('#app');
 }

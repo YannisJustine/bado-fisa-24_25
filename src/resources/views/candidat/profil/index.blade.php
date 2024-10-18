@@ -94,7 +94,7 @@
                                 </div>
                                 <input id="date" type="text"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-logo-orange-500 focus:border-logo-orange-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-logo-orange-500 dark:focus:border-logo-orange-500"
-                                    readonly value="{{ $candidat->date_naissance->format('d-m-Y') }}">
+                                    readonly value="{{ $candidat->date_naissance->format('d/m/Y') }}">
                             </div>
                         </div>
                         <div class="mb-6">
@@ -170,7 +170,7 @@
                                             <x-table.cell>{{ $formuleCode->pivot->date_debut->format("d/m/Y") }}</x-table.cell>
                                             <x-table.cell>   
                                                 @if($formuleCode->pivot->date_fin)
-                                                    {{ $formuleCode->pivot->date_fin->format("d-m-Y") }}
+                                                    {{ $formuleCode->pivot->date_fin->format("d/m/Y") }}
                                                 @endif
                                             </x-table.cell>
                                         </x-table.row>

@@ -43,7 +43,7 @@ class EventService
     {
         return Candidat::where('id', $candidatId)->with('stockHeuresFormule', function($query) use($formuleId){
             $query->where('formule_conduite_id', $formuleId);
-        })->first()->stockHeuresFormule[0]->quantite_accompagnement_restante;
+        })->first()->stockHeuresFormule[0]->quantite_pedagogique_restante;
     }
 
     public function getCandidatConduiteRemainingHours($candidatId, $formuleId)

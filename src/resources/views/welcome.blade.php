@@ -8,7 +8,7 @@
 <div class="w-full flex-1 grid grid-cols-3 gap-4 content-center justify-items-center">
 
     <x-card href="{{ route('catalogue') }}"  img="{{ Vite::asset('resources/images/home/catalogue.jpg') }}" title="Catalogue">
-        Catalogue des formationss
+        Catalogue des formations
     </x-card>
 
     <x-card href="{{ route('candidats') }}"  img="{{ Vite::asset('resources/images/home/calendrier.jpg') }}" title="Candidats">

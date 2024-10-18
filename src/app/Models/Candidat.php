@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Candidat extends Model
+class Candidat extends Authenticatable
 {
     use HasFactory, Notifiable;
 
@@ -17,16 +19,41 @@ class Candidat extends Model
         'adresse',
         'email',
         'telephone',
-        'date_naissance'
+        'date_naissance',
+        'password',
     ];
-
+    protected $guard = 'candidat';
+    
     protected $casts = [
         'date_naissance' => 'date'
     ];
 
+
+    /**
+     * Initials
+     * @return string
+     */
+    public function getInitialsAttribute() {
+        return mb_strtoupper(mb_substr($this->prenom, 0, 1, "UTF-8"), 'UTF-8').mb_strtoupper(mb_substr($this->nom, 0, 1, "UTF-8"), 'UTF-8');
+    }
+
     public function getFullNameAttribute()
     {
-        return $this->prenom . ' ' . $this->nom;
+        return ucfirst($this->prenom) . ' ' . ucfirst($this->nom);
+    }
+
+    public function nom() : Attribute
+    {
+        return Attribute::make(
+            get: fn(string $value) => ucfirst($value)
+        );
+    }
+
+    public function prenom() : Attribute
+    {
+        return Attribute::make(
+            get: fn(string $value) => ucfirst($value)
+        );
     }
 
     public function getFullNameAgeAttribute()
@@ -38,6 +65,8 @@ class Candidat extends Model
     {
         return Carbon::parse($this->date_naissance)->age;
     }
+
+    
 
     public function achatHeuresSupplementaires()
     {

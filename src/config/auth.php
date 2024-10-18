@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'candidat' => [
+            'driver' => 'session',
+            'provider' => 'candidat',
+        ],
     ],
 
     /*
@@ -69,6 +73,10 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+        'candidat' => [
+            'driver'=>'eloquent',
+            'model'=> App\Models\Candidat::class,
+        ],
     ],
 
     /*
@@ -89,6 +97,12 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'candidat' => [
+            'provider' => 'candidat',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

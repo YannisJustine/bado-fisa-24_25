@@ -7,6 +7,7 @@ use App\Notifications\EventAskedNotif;
 use App\Http\Controllers\UserController;
 use App\Notifications\EventUpdatedNotif;
 use App\Http\Controllers\FormuleController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\CandidatController;
 use App\Http\Controllers\HeureSuppController;
 use App\Http\Controllers\FormuleCodeController;
@@ -24,7 +25,6 @@ use App\Http\Controllers\FormuleConduiteController;
 */
 
 include("auth.php");
-
 Route::middleware('auth')->group(function () {
     Route::get('/formateur', [UserController::class, 'show'])->name('formateur');
 });
@@ -46,7 +46,10 @@ Route::post('catalogue/heures_supp', [HeureSuppController::class, 'store'])->nam
 
 Route::get('/candidats', Applicant::class)->name('candidats');
 Route::get('/candidats/{candidat}', [CandidatController::class, 'show'])->name('candidats.profile');
-// Route::get('valide', CatalogueController::class);
+
+Route::get('/ratings', [RatingController::class, 'index'])->name('rating.index');
+Route::post('/rating', [RatingController::class, 'store'])->name('rating.store');
+
 
 Route::get('/test-notification-ask', function () {
     $lecon = Lecon::first();

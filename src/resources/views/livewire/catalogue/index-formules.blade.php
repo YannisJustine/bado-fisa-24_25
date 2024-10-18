@@ -1,4 +1,4 @@
-<main class="mx-auto max-w-7xl px-4 grow w-full relative">
+<main class="mx-auto max-w-7xl px-4 grow w-full">
     <div class="border-b border-gray-200 pb-6 pt-24">
         <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white">Formules</h1>
     </div>
@@ -9,7 +9,7 @@
         <div class="mt-5">
             <h3 class="text-lg font-semibold tracking-tight text-gray-900 dark:text-white">Filtres</h3>
             <div class="my-5">
-                <x-livewire.search-bar name="search-filter" placeholder="Nom formule" />
+                <x-livewire.search-bar name="search-filter" placeholder="Nom formule"/>
             </div>
             <div id="accordion-flush" data-accordion="open" data-inactive-classes="text-gray-500"
                 data-active-classes="dark:text-gray-400" wire:ignore.self>
@@ -62,24 +62,16 @@
         </div>
 
         <!-- Product grid -->
-        <div class="lg:col-span-3 relative">
-            <div wire:loading.delay class="absolute w-full h-full z-50 bg-gray-500 bg-opacity-50 ">
-                <div class="flex items center justify-center w-full h-full">
-                    <div class="flex flex-col items-center justify-center">
-                        <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-logo-orange-500"></div>
-                        <p class="text-lg font-semibold text-gray-900 dark:text-white">Chargement...</p>
-                    </div>
-                </div>
-            </div>
+        <div class="lg:col-span-3 ">
             <div class="container mx-auto flex flex-row flex-wrap justify-evenly flex-1 items-center">
                 @forelse ($formules as $formule)
-                <x-product.index :libelle="$formule->libelle" :prix="$formule->prix" button="Détails formule" :link="route('catalogue.formules.formule', ['formule' => $formule->libelle])" />
+                    <x-product.index :libelle="$formule->libelle" :prix="$formule->prix" button="Détails formule" :link="route('catalogue.formules.formule', ['formule' => $formule->libelle])" />
                 @empty
-                <div class="flex flex-col items-center justify-center">
-                    <p class="text-2xl font-bold text-gray-900 dark:text-white">Aucune formule</p>
-                    <p class="text-xl font-normal text-gray-700 dark:text-gray-400">Aucune formule ne
-                        correspond à votre recherche.</p>
-                </div>
+                    <div class="flex flex-col items-center justify-center">
+                        <p class="text-2xl font-bold text-gray-900 dark:text-white">Aucune formule</p>
+                        <p class="text-xl font-normal text-gray-700 dark:text-gray-400">Aucune formule ne
+                            correspond à votre recherche.</p>
+                    </div>
                 @endforelse
 
             </div>
