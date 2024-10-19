@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Auth\Candidat;
 use App\Models\Candidat;
 use Illuminate\Routing\Controller;
 use App\Http\Requests\CreateApplicantRequest;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
-    public function index() 
+    public function index()
     {
-        return view('candidat.register');
+        return view('auth.candidat.register');
     }
 
     public function create(CreateApplicantRequest $request)
@@ -22,9 +23,11 @@ class RegisterController extends Controller
             'email' => strtolower($validated['email']),
             'adresse' => $validated['address'],
             'telephone' => $validated['phone'],
-            'date_naissance' => $validated['birthday']
+            'date_naissance' => $validated['birthday'],
+            'password' => bcrypt($validated['password'])
         ]);
 
+        Auth::guard('candidat')->login($candidate);
 
         return redirect()->route('home')->with('success','Le candidat a bien été enregistré');
     }

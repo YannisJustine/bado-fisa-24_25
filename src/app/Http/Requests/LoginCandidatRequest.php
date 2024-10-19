@@ -22,7 +22,7 @@ class LoginCandidatRequest extends FormRequest
     {
 
         return [
-            'email' => ['required','exists:candidats,email','email'],
+            'email' => ['required','email'],
             'password' => 'required|string',
             'remember' => 'sometimes',
         ];

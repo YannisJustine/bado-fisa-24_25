@@ -54,7 +54,7 @@
 
             <p class="mt-10 text-center text-sm text-white">
                 Pas encore membre ?
-                <a href="{{ route('register.user') }}" class="font-semibold leading-6 text-logo-orange-400 hover:text-logo-orange-600">
+                <a href="{{ route('register.candidat') }}" class="font-semibold leading-6 text-logo-orange-400 hover:text-logo-orange-600">
                     S'inscrire
                 </a>
             </p>

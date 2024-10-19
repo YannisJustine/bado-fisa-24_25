@@ -25,30 +25,35 @@ use App\Http\Controllers\FormuleConduiteController;
 */
 
 include("auth.php");
-Route::middleware('auth')->group(function () {
-    Route::get('/formateur', [UserController::class, 'show'])->name('formateur');
-});
 
 Route::view('/', 'welcome')->name('home');
-
-Route::view('/calendrier', 'calendar')->name('calendrier');
-
-Route::view('catalogue', 'catalogue.index')->name('catalogue');
-
-Route::get('catalogue/formules',[FormuleController::class, "index"])->name('catalogue.formules');
-Route::get('catalogue/formules/{formule:libelle}', [FormuleController::class, "show"])->name('catalogue.formules.formule');
-Route::post('catalogue/formules/conduite', [FormuleConduiteController::class, 'store'])->name('achat.formules.conduite');
-Route::post('catalogue/formules/code', [FormuleCodeController::class, 'store'])->name('achat.formules.code');
-
-Route::get('catalogue/heures_supp', [HeureSuppController::class, "index"])->name('catalogue.heures_supp');
-Route::get('catalogue/heures_supp/{type_permis}', [HeureSuppController::class, 'show'])->name('catalogue.heures_supp.type_permis');
-Route::post('catalogue/heures_supp', [HeureSuppController::class, 'store'])->name('achat.heures_supp');
-
-Route::get('/candidats', Applicant::class)->name('candidats');
-Route::get('/candidats/{candidat}', [CandidatController::class, 'show'])->name('candidats.profile');
-
 Route::get('/ratings', [RatingController::class, 'index'])->name('rating.index');
 Route::post('/rating', [RatingController::class, 'store'])->name('rating.store');
+
+Route::middleware('auth:web')->group(function () {
+    Route::get('/formateur', [UserController::class, 'show'])->name('formateur');
+    Route::view('/calendrier', 'calendar')->name('calendrier');
+
+});
+
+Route::middleware('auth:candidat')->group(function() {
+        
+    Route::view('catalogue', 'catalogue.index')->name('catalogue');
+
+    Route::get('catalogue/formules',[FormuleController::class, "index"])->name('catalogue.formules');
+    Route::get('catalogue/formules/{formule:libelle}', [FormuleController::class, "show"])->name('catalogue.formules.formule');
+    Route::post('catalogue/formules/conduite', [FormuleConduiteController::class, 'store'])->name('achat.formules.conduite');
+    Route::post('catalogue/formules/code', [FormuleCodeController::class, 'store'])->name('achat.formules.code');
+
+    Route::get('catalogue/heures_supp', [HeureSuppController::class, "index"])->name('catalogue.heures_supp');
+    Route::get('catalogue/heures_supp/{type_permis}', [HeureSuppController::class, 'show'])->name('catalogue.heures_supp.type_permis');
+    Route::post('catalogue/heures_supp', [HeureSuppController::class, 'store'])->name('achat.heures_supp');
+
+    Route::get('/candidats', Applicant::class)->name('candidats');
+    Route::get('/candidats/{candidat}', [CandidatController::class, 'show'])->name('candidats.profile');
+
+});
+
 
 
 Route::get('/test-notification-ask', function () {

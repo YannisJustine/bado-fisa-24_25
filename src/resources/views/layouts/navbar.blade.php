@@ -43,11 +43,14 @@
                 </div>
             </div>
             <div class="absolute right-0 ">
-                @guest
+                @php
+                    $isGuest = Auth::guard('web')->guest() && Auth::guard('candidat')->guest();
+                @endphp
+                @if($isGuest)
                     <x-link-button href="{{ route('login.candidat') }}" class="md:py-2 md:px-3 px-1 py-1 bg-orange-600 dark:hover:bg-orange-800 dark:hover:text-white">
                         Se connecter
                     </x-link-button>
-                @else 
+                @else
                     <div class="relative ml-3">
                         <div>
                             <button type="button"
@@ -84,7 +87,7 @@
                             </ul>
                         </div>
                     </div>
-                @endguest
+                @endif
             </div>
         </div>
     </div>

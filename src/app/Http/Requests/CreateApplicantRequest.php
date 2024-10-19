@@ -28,6 +28,7 @@ class CreateApplicantRequest extends FormRequest
             'phone' => ['required', 'regex:/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/i'],
             'address' => 'required|string|max:255',
             'birthday' => 'required|date|before:today',
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ];
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Candidat;
 use App\Models\FormuleConduite;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\DrivingFormulaRequest;
 
 class FormuleConduiteController extends Controller
@@ -14,14 +15,23 @@ class FormuleConduiteController extends Controller
         $validated = $request->validated();
 
         // Récupération du candidat et de la formule
-        $candidat = Candidat::find($validated["candidat_id"]);
+        $candidat = Auth::guard('candidat')->user();
         $formule_conduite = FormuleConduite::find($validated["formule_id"]);
+
+        $ageMin = $formule_conduite->age_minimum ?? $formule_conduite->typePermis->age_minimum_requis;
+
+        // Vérification de l'âge du candidat 
+        $candidat->age = now()->diffInYears($candidat->date_naissance);
+        if ($candidat->age < $ageMin) {
+            return redirect()->back()->with('error','Vous n\'avez pas l\'âge requis pour acheter cette formule');
+        }
 
         // Ajout de l'achat de la formule au candidat
         $candidat->achatFormuleConduite()->create([
             'formule_conduite_id' => $formule_conduite->formule_id,
             'date_achat' => now(),
         ]);
+
 
         // Si le candidat n'a pas de stock d'heures pour cette formule, on en crée un sinon on met à jour le stock
         if ($candidat->stockHeuresFormule()->where('formule_conduite_id', $formule_conduite->formule_id)->doesntExist()) {

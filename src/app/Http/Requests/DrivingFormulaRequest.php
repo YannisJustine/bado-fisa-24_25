@@ -22,7 +22,6 @@ class DrivingFormulaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'candidat_id' => 'required|exists:candidats,id',
             'formule_id' => 'required|exists:formules_conduite,formule_id'
         ];
     }
