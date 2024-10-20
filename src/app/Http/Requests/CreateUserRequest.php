@@ -25,7 +25,6 @@ class CreateUserRequest extends FormRequest
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email'=> 'required|email|unique:users,email',
-            'seq' => ['required', 'regex:/^(1|2)([0-9]{2})(0[1-9]|1[0-2])([0-9]{8})$/', 'unique:users,num_securite_sociale'],
             'password' => 'required|string|min:8|confirmed',
             'password_confirmation' => 'required|string|min:8|same:password',
             'habilitation' => 'required|array',

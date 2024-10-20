@@ -12,6 +12,7 @@ use App\Http\Controllers\CandidatController;
 use App\Http\Controllers\HeureSuppController;
 use App\Http\Controllers\FormuleCodeController;
 use App\Http\Controllers\FormuleConduiteController;
+use App\Http\Controllers\Auth\User\RegisterController as UserRegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,8 +33,12 @@ Route::post('/rating', [RatingController::class, 'store'])->name('rating.store')
 
 Route::middleware('auth:web')->group(function () {
     Route::get('/formateur', [UserController::class, 'show'])->name('formateur');
-    Route::view('/calendrier', 'calendar')->name('calendrier');
-
+    
+    Route::middleware('role:admin')->group(function() {
+        Route::get('/register/user', [UserRegisterController::class, "index"])->name("register.user");
+        Route::post('/register/user', [UserRegisterController::class, "create"])->name("register.user.post");
+        Route::view('/calendrier', 'calendar')->name('calendrier');
+    });
 });
 
 Route::middleware('auth:candidat')->group(function() {

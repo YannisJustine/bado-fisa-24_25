@@ -21,17 +21,6 @@ use App\Http\Controllers\Api\UserEventController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-
-Route::middleware('auth:sanctum')->group(function () {
-
-    
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    });
-
-});
-
 Route::apiResource('candidats',  CandidatController::class)
     ->only(['index', 'show']);
 

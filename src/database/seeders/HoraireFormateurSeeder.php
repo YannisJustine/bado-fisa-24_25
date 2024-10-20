@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Creneau;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Log;
 
 class HoraireFormateurSeeder extends Seeder
 {
@@ -15,8 +16,8 @@ class HoraireFormateurSeeder extends Seeder
     {
         $creneau_count = Creneau::whereNotBetween('heure_debut', ['12:00', '13:00'])->count();
 
-        for ($i=0; $i < $number; $i++) { 
-            $user = User::all()->random();
+        for ($i=0; $i < $number; $i++) {
+            $user = User::role('formateur')->inRandomOrder()->first();
             $user_creneaux = $user->creneaux;
             $user_creneaux_count = $user->creneaux->count();
             

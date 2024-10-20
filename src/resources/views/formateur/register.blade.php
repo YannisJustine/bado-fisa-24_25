@@ -16,7 +16,6 @@
                 <x-input type="text" name="last_name" label="Nom" />
                 <x-input type="text" name="first_name" label="Prénom" />
                 <x-input type="text" name="email" label="Adresse mail" />
-                <x-input type="text" name="seq" label="Numéro de sécurité sociale" />
                 <x-input name="password" label="Mot de passe" type="password" />
                 <x-input name="password_confirmation" label="Confirmation du mot de passe" type="password" />
                 <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Habilitations</h3>

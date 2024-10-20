@@ -35,10 +35,11 @@
                             <x-navigation.link href="{{ route('catalogue') }}"> Catalogue </x-navigation.link>
                             <x-navigation.link href="{{ route('register') }}"> Inscription </x-navigation.link>
                         @endauth
-                        @auth('web')
-                            <x-navigation.link href="{{ route('candidats') }}">  Candidats </x-navigation.link>
+                        @role('admin')
                             <x-navigation.link href="{{ route('calendrier') }}"> Calendrier </x-navigation.link>
-                        @endauth
+                        @else
+                            <x-navigation.link href="{{ route('candidats') }}">  Candidats </x-navigation.link>
+                        @endrole
                     </div>
                 </div>
             </div>

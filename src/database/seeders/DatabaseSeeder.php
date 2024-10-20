@@ -32,10 +32,18 @@ class DatabaseSeeder extends Seeder
         $this->call(CreneauSeeder::class);
         $this->call(RoleSeeder::class);
 
-        User::factory(3)->create();
+        $formateurs = User::factory(3)->create();
+        $formateurs->each(function ($formateur) {
+            $formateur->assignRole('formateur');
+        });
         Candidat::factory(10)->create();
         Vehicule::factory(10)->create();
-
+        $admin = User::factory()->create([
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('admin'),
+        ]);
+        $admin->assignRole('admin');
+        
         $this->call(HoraireFormateurSeeder::class, false, ['number' => 100]);
         $this->call(HabilitationSeeder::class);
 

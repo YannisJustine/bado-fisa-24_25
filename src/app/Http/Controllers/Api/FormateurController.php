@@ -15,7 +15,7 @@ class FormateurController extends Controller
      */
     public function index()
     {
-        return new FormateurCollection(User::with('creneaux', 'typePermis')->get());
+        return new FormateurCollection(User::with('creneaux', 'typePermis')->role('formateur')->get());
     }
 
     /**

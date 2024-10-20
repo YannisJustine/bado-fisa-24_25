@@ -23,7 +23,6 @@ class RegisterController extends Controller
             'nom' => strtolower($validated['last_name']),
             'prenom' => strtolower($validated['first_name']),
             'email' => strtolower($validated['email']),
-            'num_securite_sociale' => $validated['seq'],
             'password' => Hash::make($validated['password']),
         ]);
 
