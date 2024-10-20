@@ -2,16 +2,12 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 
-function renderChunks(deps) {
-    let chunks = {};
-    Object.keys(deps).forEach((key) => {
-      if (['react', 'react-router-dom', 'react-dom'].includes(key)) return;
-      chunks[key] = [key];
-    });
-    return chunks;
-  }
-
 export default defineConfig({
+  server: {
+    hmr: {
+      host: 'localhost'
+    }
+  },
     plugins: [
         vue(),
 

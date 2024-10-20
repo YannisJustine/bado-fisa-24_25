@@ -1,7 +1,7 @@
 <div
     class="m-8 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <a href="{{ $link }}">
-        <img class="rounded-t-lg" src="https://placehold.co/600x400" alt="image" />
+        <img class="rounded-t-lg w-full h-48 object-cover" src="{{ Vite::asset('resources/images/catalog/' . $id . '.jpg') }}" alt="image" style="width: 100%;" />
     </a>
     <div class="p-5">
         <a href="{{ $link }}">

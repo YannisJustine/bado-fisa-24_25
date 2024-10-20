@@ -14,7 +14,6 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
-
                     <svg id="iconeFermee" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -95,8 +94,14 @@
     <div class="hidden" id="menu">
         <div class="space-y-1 px-2 pb-3 pt-2 w-full">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <x-navigation.link current> Voir calendrier</x-navigation.link>
-            <x-navigation.link> Faire une demande </x-navigation.link>
+            @auth('candidat')
+                <x-navigation.link href="{{ route('catalogue') }}"> Catalogue </x-navigation.link>
+                <x-navigation.link href="{{ route('register') }}"> Inscription </x-navigation.link>
+            @endauth
+            @auth('web')
+                <x-navigation.link href="{{ route('candidats') }}">  Candidats </x-navigation.link>
+                <x-navigation.link href="{{ route('calendrier') }}"> Calendrier </x-navigation.link>
+            @endauth
         </div>
     </div>
 </nav>

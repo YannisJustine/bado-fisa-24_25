@@ -1,5 +1,5 @@
 @if(Request::path() != "/")
-<div class="container mx-auto mt-5">
+<div class="container mx-auto my-5">
     <nav class="flex" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
             <li class="inline-flex items-center">

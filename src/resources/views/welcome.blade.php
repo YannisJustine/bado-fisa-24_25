@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="w-full flex-1 grid grid-cols-3 gap-4 content-center justify-items-center">
+<div class="w-full h-full flex flex-col md:flex-row items-center justify-center">
     @auth('candidat')
         <x-card href="{{ route('catalogue') }}"  img="{{ Vite::asset('resources/images/home/catalogue.jpg') }}" title="Catalogue">
             Catalogue des formations

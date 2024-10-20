@@ -19,6 +19,7 @@
                 </div>
             </div>
         @endif
+        <!-- TODO: fix height full not working inside flex-1 parent -->
         <div class="grow flex flex-col" id="app" >
             @yield('breadcrumb')
             @yield('content')
