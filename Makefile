@@ -9,6 +9,7 @@ BUILD_FLAG =
 endif
 
 dev:
+	chmod +x ./docker-entrypoint-dev.sh
 	docker compose --env-file ./src/.env -f docker-compose.yml -f docker-compose.dev.yml up -d $(BUILD_FLAG)
 
 prod:

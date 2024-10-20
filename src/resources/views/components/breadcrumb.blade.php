@@ -1,7 +1,7 @@
 @if(Request::path() != "/")
-<div class="container mx-auto my-5">
-    <nav class="flex" aria-label="Breadcrumb">
-        <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+<div class="container mx-auto my-5 p-3">
+    <nav class="flex items-center" aria-label="Breadcrumb">
+        <ol class="inline-flex space-x-1 md:space-x-2 rtl:space-x-reverse">
             <li class="inline-flex items-center">
                 <a href="/"
                     class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
@@ -13,32 +13,49 @@
                     Accueil
                 </a>
             </li>
-                @foreach (explode('/', urldecode(Request::path())) as $link)
-                    @if($loop->last)
-                        <li aria-current="page">
-                            <div class="flex items-center">
-                                <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                                </svg>
-                                <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
-                                    {{ __(ucfirst($link)) }}
-                                </span>
-                            </div>
-                        </li>
+            @php
+                $segments = explode('/', urldecode(Request::path()));
+                $path = '';
+            @endphp
+            @foreach ($segments as $segment)
+                @php
+                    $path .= $segment . '/';
+                    $routeName = implode('.', array_slice($segments, 0, $loop->index + 1));
+                @endphp
+                @if($loop->last)
+                    <li aria-current="page">
+                        <div class="flex items-center">
+                            <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                            </svg>
+                            <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
+                                {{ __(ucfirst($segment)) }}
+                            </span>
+                        </div>
+                    </li>
+                @else
+                    @if(Route::has($routeName))
+                        <div class="flex items-center">
+                            <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                            </svg>
+                            <a href="{{ route($routeName) }}" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
+                                {{ __(ucfirst($segment)) }}
+                            </a>
+                        </div>
                     @else
                         <div class="flex items-center">
                             <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
                             </svg>
-                            <a  href="{{ route(implode('.', array_slice(explode('/', Request::path()), 0, $loop->index + 1))) }}" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
-                                {{ __(ucfirst($link)) }}
-                            </a>
+                            <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
+                                {{ __(ucfirst($segment)) }}
+                            </span>
                         </div>
                     @endif
-                @endforeach
-            </ol>
-        </nav>
-    </div>
+                @endif
+            @endforeach
+        </ol>
+    </nav>
+</div>
 @endif
-    
-
