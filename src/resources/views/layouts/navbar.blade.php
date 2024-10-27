@@ -33,11 +33,10 @@
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                         @auth('candidat')
                             <x-navigation.link href="{{ route('catalogue') }}"> Catalogue </x-navigation.link>
-                            <x-navigation.link href="{{ route('register') }}"> Inscription </x-navigation.link>
                         @endauth
                         @role('admin')
                             <x-navigation.link href="{{ route('calendrier') }}"> Calendrier </x-navigation.link>
-                        @else
+                        @elserole('formateur')
                             <x-navigation.link href="{{ route('candidats') }}">  Candidats </x-navigation.link>
                         @endrole
                     </div>
@@ -61,7 +60,7 @@
                                 <span class="absolute -inset-1.5"></span>
                                 <span class="sr-only">Open user menu</span>
                                 <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-orange-100 rounded-full dark:bg-orange-600">
-                                    <span class="font-medium text-orange-600 dark:text-white">{{ getAuthUser()->user()->initials }}</span>
+                                    <span class="font-medium text-orange-600 dark:text-white">{{ getAuthUser()->initials }}</span>
                                 </div>
                             </button>
                         </div>
@@ -69,15 +68,21 @@
                         <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-orange-100 rounded-lg shadow dark:bg-orange-700 dark:divide-orange-600"
                             id="user-dropdown">
                             <div class="px-4 py-3">
-                                <span class="block text-sm text-orange-900 dark:text-white">{{ getAuthUser()->user()->fullname }}</span>
+                                <span class="block text-sm text-orange-900 dark:text-white">{{ getAuthUser()->fullname }}</span>
                                 <span
-                                    class="block text-sm  text-orange-500 truncate dark:text-gray-100">{{ getAuthUser()->user()->email }}</span>
+                                    class="block text-sm  text-orange-500 truncate dark:text-gray-100">{{ getAuthUser()->email }}</span>
                             </div>
                             <ul class="py-2" aria-labelledby="user-menu-button">
                                 @auth('web')
                                     <li>
                                         <a href=" {{ (Route::currentRouteName() != 'formateur') ? route('formateur') : '#' }} "
                                             class="block px-4 py-2 text-sm text-orange-700 hover:bg-orange-100 dark:hover:bg-orange-600 dark:text-orange-200 dark:hover:text-white">Tableau de bord</a>
+                                    </li>
+                                @endauth
+                                @auth('candidat')
+                                    <li>
+                                        <a href="{{ route('candidats.profile', ['candidat' => getAuthUser()->id ]) }}"
+                                            class="block px-4 py-2 text-sm text-orange-700 hover:bg-orange-100 dark:hover:bg-orange-600 dark:text-orange-200 dark:hover:text-white">Profil</a>
                                     </li>
                                 @endauth
                                 <li>

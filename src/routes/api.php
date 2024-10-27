@@ -21,29 +21,31 @@ use App\Http\Controllers\Api\UserEventController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::apiResource('candidats',  CandidatController::class)
-    ->only(['index', 'show']);
+Route::middleware(['auth', 'role:admin'])->group(function() {
+    Route::apiResource('candidats',  CandidatController::class)
+        ->only(['index', 'show']);
 
-Route::get('formateurs/{user}/events', [FormateurController::class, "events"]);
+    Route::get('formateurs/{user}/events', [FormateurController::class, "events"]);
 
-Route::apiResource('formateurs', FormateurController::class)
-    ->only(['index', 'show']);
+    Route::apiResource('formateurs', FormateurController::class)
+        ->only(['index', 'show']);
 
-Route::apiResource('creneaux',  CreneauController::class)
-    ->only(['index', 'show']);
+    Route::apiResource('creneaux',  CreneauController::class)
+        ->only(['index', 'show']);
 
-Route::apiResource('events/users', UserEventController::class)
-    ->only(['show'])
-    ->parameters(['users' => 'user']);
+    Route::apiResource('events/users', UserEventController::class)
+        ->only(['show'])
+        ->parameters(['users' => 'user']);
 
-Route::apiResource('events',  EventController::class)
-    ->only(['index', 'store', 'destroy', 'update'])
-    ->parameters(['events' => 'lecon']);
+    Route::apiResource('events',  EventController::class)
+        ->only(['index', 'store', 'destroy', 'update'])
+        ->parameters(['events' => 'lecon']);
 
-    
-Route::apiResource('formules',  FormuleController::class)
-    ->only(['index']);
-    
-Route::apiResource('type_permis',  PermisController::class)
-    ->only(['index']);
-    
+        
+    Route::apiResource('formules',  FormuleController::class)
+        ->only(['index']);
+        
+    Route::apiResource('type_permis',  PermisController::class)
+        ->only(['index']);
+        
+});

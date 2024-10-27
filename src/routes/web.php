@@ -39,6 +39,9 @@ Route::middleware('auth:web')->group(function () {
         Route::post('/register/user', [UserRegisterController::class, "create"])->name("register.user.post");
         Route::view('/calendrier', 'calendar')->name('calendrier');
     });
+
+    Route::get('/candidats', Applicant::class)->name('candidats');
+    Route::get('/candidats/{candidat}', [CandidatController::class, 'show'])->name('candidats.profile');
 });
 
 Route::middleware('auth:candidat')->group(function() {
@@ -53,8 +56,7 @@ Route::middleware('auth:candidat')->group(function() {
     Route::get('catalogue/heures_supp', [HeureSuppController::class, "index"])->name('catalogue.heures_supp');
     Route::get('catalogue/heures_supp/{type_permis}', [HeureSuppController::class, 'show'])->name('catalogue.heures_supp.type_permis');
     Route::post('catalogue/heures_supp', [HeureSuppController::class, 'store'])->name('achat.heures_supp');
-
-    Route::get('/candidats', Applicant::class)->name('candidats');
+    
     Route::get('/candidats/{candidat}', [CandidatController::class, 'show'])->name('candidats.profile');
 
 });
