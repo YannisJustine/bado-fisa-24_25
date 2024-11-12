@@ -7,7 +7,12 @@ export default class API {
     }
 
     static async fetchResource(endpoint, params = '') {
-        const response = await fetch(`${API.getBaseUrl()}/${endpoint}?${params}`);
+        const response = await fetch(`${API.getBaseUrl()}/${endpoint}?${params}`, {
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json',
+            },
+        });
         if (!response.ok) {
             throw new Error(`API error (${response.status})`);
         }

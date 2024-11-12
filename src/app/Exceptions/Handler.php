@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Auth\AuthenticationException;
 
 class Handler extends ExceptionHandler
 {
@@ -52,7 +53,7 @@ class Handler extends ExceptionHandler
 
         switch ($statusCode) {
             case 401:
-                $response['message'] = 'Unauthorized';
+                $response['message'] = 'Unauthenticated';
                 break;
             case 403:
                 $response['message'] = 'Forbidden';
@@ -72,23 +73,27 @@ class Handler extends ExceptionHandler
                 break;
         }
 
-        if (config('app.debug')) {
-            $response['trace'] = $exception->getTrace();
-            $response['code'] = $exception->getCode();
-        }
-
         $response['status'] = $statusCode;
 
         return response()->json($response, $statusCode);
     }
 
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        // Forcer une réponse JSON pour toutes les requêtes dans /api
+        if ($request->is('api/*')) {
+            return response()->json(['message' => 'Unauthenticated.'], 401);
+        }
+    
+        // Autres requêtes non-API (comportement par défaut)
+        return $request->expectsJson()
+            ? response()->json(['message' => 'Unauthenticated.'], 401)
+            : redirect()->guest(route('login.candidat'));
+    }
+
     private function handleApiException($request, Exception $exception)
     {
         $exception = $this->prepareException($exception);
-
-        if ($exception instanceof \Illuminate\Http\Exception\HttpResponseException) {
-            $exception = $exception->getResponse();
-        }
 
         if ($exception instanceof \Illuminate\Auth\AuthenticationException) {
             $exception = $this->unauthenticated($request, $exception);
@@ -97,20 +102,18 @@ class Handler extends ExceptionHandler
         if ($exception instanceof \Illuminate\Validation\ValidationException) {
             $exception = $this->convertValidationExceptionToResponse($exception, $request);
         }
-
         return $this->customApiResponse($exception);
     }
 
     
-    
     public function render($request, Throwable $exception)
     {
-        if ($request->wantsJson() || $request->is("api/*")) {  
+        if ($request->is("api/*")) {
             return $this->handleApiException($request, $exception);
         } else {
             $retval = parent::render($request, $exception);
         }
     
         return $retval;
-    }     
+    }
 }
