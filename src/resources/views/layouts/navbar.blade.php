@@ -38,6 +38,7 @@
                         @elserole('formateur')
                         <x-navigation.link href="{{ route('candidats') }}"> Candidats </x-navigation.link>
                         @endrole
+                        <x-navigation.link href="{{ route('rating.index') }}"> Avis </x-navigation.link>
                     </div>
                 </div>
             </div>
@@ -131,6 +132,8 @@
             @auth('web')
             <x-navigation.link href="{{ route('candidats') }}"> Candidats </x-navigation.link>
             @endauth
+
+            <x-navigation.link href="{{ route('rating.index') }}"> Avis </x-navigation.link>
 
             @if($isGuest)
             <x-navigation.link href="{{ route('login.candidat') }}" class="md:py-2 md:px-3 px-1 py-1 bg-orange-600 dark:hover:bg-orange-800 dark:hover:text-white">

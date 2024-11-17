@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Candidat;
-use App\Models\Formule;
-use App\Models\TypePermis;
 
 class CandidatController extends Controller
 {

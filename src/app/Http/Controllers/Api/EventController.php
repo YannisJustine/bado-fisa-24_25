@@ -124,7 +124,7 @@ class EventController extends Controller
     }
 
     public function destroy(Lecon $lecon)
-    {     
+    {
         if (!$lecon) {
             return $this->eventService->error(404, ['lecon_id' => ['La leçon n\'existe pas']]);
         }

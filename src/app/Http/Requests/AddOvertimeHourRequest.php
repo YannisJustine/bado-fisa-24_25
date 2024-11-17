@@ -22,7 +22,6 @@ class AddOvertimeHourRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'candidat_id'=> 'required|exists:candidats,id',
             'permis_id' => 'required|exists:type_permis,id',
             'quantite' => 'required|integer|min:1',
         ];

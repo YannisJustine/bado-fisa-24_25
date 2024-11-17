@@ -6,13 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="{{ Vite::asset('resources/images/logo/RoulerMalin.svg') }}" type="image/svg+xml">
-
-    @if (session()->has('token_api'))
-        <meta name="api_token" content="{{ session()->get('token_api') }}">
-    @endif
-
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @vite(['resources/js/app.js'])
     @yield('meta')

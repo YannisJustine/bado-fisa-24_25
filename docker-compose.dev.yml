@@ -7,6 +7,6 @@ services:
       - ./src:/var/www/html
       - ./docker-entrypoint-dev.sh:/docker-entrypoint.sh
     ports:
-      - "8080:8000"
+      - "80:8000"
       - "5173:5173"
     entrypoint: /docker-entrypoint.sh
