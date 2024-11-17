@@ -5,7 +5,7 @@ import vue from "@vitejs/plugin-vue";
 export default defineConfig(({ mode }) => {
     return {
         server: {
-            hmr: mode === "development" ? ({ host: "localhost" }) : false,
+            hmr: mode === "development" ? { host: "localhost" } : false,
         },
         plugins: [
             vue(),
@@ -13,14 +13,14 @@ export default defineConfig(({ mode }) => {
             laravel({
                 input: ["resources/js/app.js", "resources/js/tabs.js"],
                 //Refresh in dev mode when files change.
-                refresh: true,
+                refresh: [
+                    "routes/**",
+                    "resources/views/**",
+                    "app/Http/Livewire/**",
+                ],
             }),
         ],
-        // refresh: [
-        //     'routes/**',
-        //     'resources/views/**',
-        //     'app/Http/Livewire/**',
-        // ]
+
         resolve: {
             alias: {
                 "@": "/node_modules/",

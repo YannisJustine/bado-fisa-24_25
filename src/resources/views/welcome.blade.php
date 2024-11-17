@@ -12,9 +12,15 @@
         </x-card>
     @endauth
     @auth
-        <x-card href="{{ route('calendrier') }}" img="{{ Vite::asset('resources/images/home/calendrier.jpg') }}" title="Calendrier">
-            Calendrier des leçons
-        </x-card>
+        @role('admin')
+            <x-card href="{{ route('calendrier') }}" img="{{ Vite::asset('resources/images/home/calendrier.jpg') }}" title="Calendrier">
+                Calendrier des leçons
+            </x-card>
+        @elserole('formateur')
+            <x-card href="{{ route('formateur') }}" img="{{ Vite::asset('resources/images/home/calendrier.jpg') }}" title="Tableau">
+                Tableau de bord
+            </x-card>
+        @endrole
     @endauth
 </div>
 

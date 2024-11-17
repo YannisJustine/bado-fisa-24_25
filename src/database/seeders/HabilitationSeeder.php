@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\TypePermis;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Log;
 
 class HabilitationSeeder extends Seeder
 {
@@ -15,14 +16,13 @@ class HabilitationSeeder extends Seeder
     {
         $permis_count = TypePermis::all()->count();
 
-        for ($i=0; $i < $number; $i++) { 
-            $user = User::all()->random();
+        for ($i=0; $i < $number; $i++) {
+            $user = User::role('formateur')->inRandomOrder()->first();
             $user_permis = $user->typePermis;
             $user_permis_count = $user_permis->count();
             
             // On vérifie que le formateur n'a pas déjà toutes les habilitations
             if($user_permis_count >= $permis_count) {
-                $i--;
                 continue;
             }
 

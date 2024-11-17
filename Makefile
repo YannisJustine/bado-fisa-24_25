@@ -8,6 +8,8 @@ else
 BUILD_FLAG =
 endif
 
+all: prod
+
 dev:
 	chmod +x ./docker-entrypoint-dev.sh
 	docker compose --env-file ./src/.env -f docker-compose.yml -f docker-compose.dev.yml up -d $(BUILD_FLAG)
@@ -31,7 +33,7 @@ stop-all:
 	docker stop `docker ps -a -q`
 
 clean:
-	docker rm apache mysql redis || true
+	docker rm apache postgres redis || true
 	docker rmi --force apache postgres:16 redis:7.4.1-alpine || true
 	docker volume rm --force db_data || true
 	
