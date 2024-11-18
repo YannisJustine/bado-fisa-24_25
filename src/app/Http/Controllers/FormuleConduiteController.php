@@ -19,11 +19,15 @@ class FormuleConduiteController extends Controller
         $formule_conduite = FormuleConduite::find($validated["formule_id"]);
 
         $ageMin = $formule_conduite->age_minimum ?? $formule_conduite->typePermis->age_minimum_requis;
+        $ageMax = $formule_conduite->age_maximum ?? $formule_conduite->typePermis->age_maximum_requis;
 
         // Vérification de l'âge du candidat 
         $candidat->age = now()->diffInYears($candidat->date_naissance);
-        if ($candidat->age < $ageMin) {
+        if ($ageMin && $candidat->age < $ageMin) {
             return redirect()->back()->with('error','Vous n\'avez pas l\'âge requis pour acheter cette formule');
+        }
+        if ($ageMax && $candidat->age > $ageMax) {
+            return redirect()->back()->with('error','Vous avez dépassé l\'âge maximum pour acheter cette formule');
         }
 
         // Ajout de l'achat de la formule au candidat

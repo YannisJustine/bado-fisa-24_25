@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-    <div class="flex flex-1 my-10">
-        <ul class="text-sm font-medium text-gray-800 dark:text-gray-400  ml-5 p-2 rounded-t-xl "
+    <div class="flex flex-1 my-10 flex-col md:flex-row p-2">
+        <ul class="text-sm font-medium text-gray-800 dark:text-gray-400 p-2 rounded-t-xl "
             id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist" data-active-classes="bg-logo-orange-100 dark:bg-gray-800 text-logo-orange-600 dark:text-white">
             <li>
                 <button class="inline-flex items-center px-4 py-3 rounded-lg w-full border" id="infos-tab"
@@ -49,7 +49,7 @@
                 </button>
             </li>
         </ul>
-        <div id="default-tab-content" class="w-full ml-5 mr-10">
+        <div id="default-tab-content" class="w-full">
             <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="infos" role="tabpanel"
                 aria-labelledby="infos-tab">
                 <div>
@@ -191,7 +191,7 @@
                                 </div>
                             </div>
                         @else
-                            <div class="my-5 grid grid-cols-3 gap-10 h-full">
+                            <div class="my-5 grid grid-cols-1 md:grid-cols-3 gap-10 h-full">
                                 @foreach ($candidat->stockHeuresFormule as $stockHeureFormule)
 
                                     <div class="bg-gray-100 dark:bg-gray-700 divide-y-2 rounded-t-lg">

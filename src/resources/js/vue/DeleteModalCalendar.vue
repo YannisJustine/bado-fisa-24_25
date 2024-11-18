@@ -78,7 +78,6 @@ const deleteEvent = async () => {
     } catch (error) {
         console.error(error);
         errors.value = error;
-
     }
 }
 

@@ -62,18 +62,16 @@
         </div>
 
         <!-- Product grid -->
-        <div class="lg:col-span-3 ">
-            <div class="container mx-auto flex flex-row flex-wrap justify-evenly flex-1 items-center">
-                @forelse ($formules as $formule)
-                    <x-product.index :libelle="$formule->libelle" :prix="$formule->prix" button="Détails formule" :link="route('catalogue.formules.formule', ['formule' => $formule->libelle])" />
-                @empty
-                    <div class="flex flex-col items-center justify-center">
-                        <p class="text-2xl font-bold text-gray-900 dark:text-white">Aucune formule</p>
-                        <p class="text-xl font-normal text-gray-700 dark:text-gray-400">Aucune formule ne
-                            correspond à votre recherche.</p>
-                    </div>
-                @endforelse
-
+        <div class="lg:col-span-3">
+            <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+            @forelse ($formules as $formule)
+                <x-product.index :libelle="$formule->libelle" :prix="$formule->prix" button="Détails formule" :link="route('catalogue.formules.formule', ['formule' => $formule->libelle])" :id="$formule->id"/>
+            @empty
+                <div class="flex flex-col items-center justify-center col-span-full">
+                <p class="text-2xl font-bold text-gray-900 dark:text-white">Aucune formule</p>
+                <p class="text-xl font-normal text-gray-700 dark:text-gray-400">Aucune formule ne correspond à votre recherche.</p>
+                </div>
+            @endforelse
             </div>
         </div>
     </div>

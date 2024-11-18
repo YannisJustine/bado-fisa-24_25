@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Formule;
-use App\Models\Candidat;
-use Illuminate\Support\Facades\Redis;
 
 class FormuleController extends Controller
 {

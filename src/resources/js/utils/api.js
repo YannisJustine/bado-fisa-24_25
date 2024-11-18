@@ -1,99 +1,82 @@
 export default class API {
 
     static getBaseUrl() {
-        var apiUrl = new URL(window.location.href).origin;
-        apiUrl += '/api';
+        const apiUrl = `${new URL(window.location.href).origin}/api`;
         return apiUrl;
     }
 
-    static async fetchResource(endpoint, params = '') {
-        const response = await fetch(`${API.getBaseUrl()}/${endpoint}?${params}`, {
+    static getCsrfToken() {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        return csrfToken;
+    }
+
+    static async fetchResource(endpoint, params = '', method = 'GET', body = null) {
+        const request = {
             credentials: 'include',
             headers: {
                 'Accept': 'application/json',
+                'X-CSRF-Token': API.getCsrfToken()
             },
-        });
-        if (!response.ok) {
-            throw new Error(`API error (${response.status})`);
+            method: method,
+            body: body,
         }
-        const data = await response.json();
-        return data;
+        const response = await fetch(`${API.getBaseUrl()}/${endpoint}?${params}`, request);
+        return response
     }
 
     static async getCandidats() {
         const data = await API.fetchResource(`candidats`);
-        return data;
+        return data.json();
     }
 
     static async getFormateurs() {
         const data = await API.fetchResource(`formateurs`);
-        return data;
+        return data.json();
     }
 
     static async getCreneaux() {
         const data = await API.fetchResource(`creneaux`);
-        return data;
+        return data.json();
     }
 
     static async getUserCreneaux(user) {
         const data = await API.fetchResource(`formateurs/${user}/events`);
-        return data;
+        return data.json();
     }
 
     static async getEvents(args = "") {
         const data = await API.fetchResource(`events`, args);
-        return data;
+        return data.json();
     }
 
     static async getUserEvents(user, args = "") {
         const data = await API.fetchResource(`events/users/${user}`, args);
-        return data;
+        return data.json();
     }
 
     static async getFormules() {
         const data = await API.fetchResource(`formules`);
-        return data;
+        return data.json();
     }
 
     static async getTypePermis() {
         const data = await API.fetchResource(`type_permis`);
-        return data;
+        return data.json();
     }
 
     static async postEvent(event) {
-        const response = await fetch(`${API.getBaseUrl()}/events`, {
-            method: 'POST',
-            body: event,
-        });
-        return response; 
+        const data = await API.fetchResource(`events`, '', 'POST', event);
+        return data;
     }
 
     static async deleteEvent(id) {
-        try {
-            const response = await fetch(`${API.getBaseUrl()}/events/${id}`, {
-                method: 'DELETE',
-            });
-            return response;
-        }
-        catch (error) {
-            throw error;
-        }
+        const data = await API.fetchResource(`events/${id}`, '', 'DELETE');
+        return data;
     }
 
     static async updateEvent(id, event) {
-        try {
-            const response = await fetch(`${API.getBaseUrl()}/events/${id}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                method: 'PUT',
-                body: JSON.stringify(event),
-            });
-            return response;
-        }
-        catch (error) {
-            throw error;
-        }
+        const data = await API.fetchResource(`events/${id}`, '', 'PUT', event);
+        return data;
     }
 
     static async fetchOnline(endpoint, params = {}) {

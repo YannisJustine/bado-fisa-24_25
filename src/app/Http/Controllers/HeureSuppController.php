@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Candidat;
 use App\Models\TypePermis ;
 use App\Http\Requests\AddOvertimeHourRequest;
+use Illuminate\Support\Facades\Auth;
 
 class HeureSuppController extends Controller
 {
@@ -19,8 +19,7 @@ class HeureSuppController extends Controller
     */
     public function show(TypePermis $typePermis)
     {
-        $candidats = Candidat::where('date_naissance', '<=', now()->subYears($typePermis->age_minimum_requis))->get();
-        return view("catalogue.heures_supp.permis", compact('typePermis', 'candidats'));
+        return view("catalogue.heures_supp.permis", compact('typePermis'));
     }
 
     /*
@@ -30,7 +29,7 @@ class HeureSuppController extends Controller
     {
         $validated = $request->validated();
 
-        $candidat = Candidat::find($validated['candidat_id']);
+        $candidat = Auth::guard('candidat')->user();
         $permis = TypePermis::find($validated['permis_id']);
 
         if (!$candidat || !$permis) {

@@ -32,7 +32,10 @@ Route::get('/ratings', [RatingController::class, 'index'])->name('rating.index')
 Route::post('/rating', [RatingController::class, 'store'])->name('rating.store');
 
 Route::middleware('auth:web')->group(function () {
-    Route::get('/formateur', [UserController::class, 'show'])->name('formateur');
+    
+    Route::middleware('role:formateur')->group(function() {
+        Route::get('/formateur', [UserController::class, 'show'])->name('formateur');
+    });
     
     Route::middleware('role:admin')->group(function() {
         Route::get('/register/user', [UserRegisterController::class, "index"])->name("register.user");

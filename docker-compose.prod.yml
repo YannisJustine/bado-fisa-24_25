@@ -4,4 +4,4 @@ services:
       context: ./src
     container_name: apache
     ports:
-      - "8080:80"
+      - "80:80"

@@ -21,7 +21,7 @@ use App\Http\Controllers\Api\UserEventController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::middleware(['auth', 'role:admin'])->group(function() {
+Route::middleware(['auth:sanctum', 'role:admin'])->group(function() {
     Route::apiResource('candidats',  CandidatController::class)
         ->only(['index', 'show']);
 
@@ -37,7 +37,7 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
         ->only(['show'])
         ->parameters(['users' => 'user']);
 
-    Route::apiResource('events',  EventController::class)
+    Route::apiResource('events', EventController::class)
         ->only(['index', 'store', 'destroy', 'update'])
         ->parameters(['events' => 'lecon']);
 
@@ -48,4 +48,13 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
     Route::apiResource('type_permis',  PermisController::class)
         ->only(['index']);
         
+});
+
+Route::middleware(['auth:sanctum', 'role:formateur'])->group(function() {
+    Route::get('formateurs/{user}/events', [FormateurController::class, "events"]);
+    Route::apiResource('formateurs', FormateurController::class)
+        ->only(['index', 'show']);
+    Route::apiResource('events/users', UserEventController::class)
+        ->only(['show'])
+        ->parameters(['users' => 'user']);
 });
