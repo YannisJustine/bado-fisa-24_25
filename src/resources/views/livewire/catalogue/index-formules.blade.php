@@ -65,7 +65,11 @@
         <div class="lg:col-span-3">
             <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
             @forelse ($formules as $formule)
-                <x-product.index :libelle="$formule->libelle" :prix="$formule->prix" button="Détails formule" :link="route('catalogue.formules.formule', ['formule' => $formule->libelle])" :id="$formule->id"/>
+                @if($formule->isFormuleConduite() && auth()->user()->age >= $formule->formuleConduite->age_minimum && ($formule->formuleConduite->age_maximum ? auth()->user()->age <= $formule->formuleConduite->age_maximum : true))
+                    <x-product.index :libelle="$formule->libelle" :prix="$formule->prix" button="Détails formule" :link="route('catalogue.formules.formule', ['formule' => $formule->libelle])" :id="$formule->id"/>
+                @elseif($formule->isFormuleCode())
+                    <x-product.index :libelle="$formule->libelle" :prix="$formule->prix" button="Détails formule" :link="route('catalogue.formules.formule', ['formule' => $formule->libelle])" :id="$formule->id"/>
+                @endif
             @empty
                 <div class="flex flex-col items-center justify-center col-span-full">
                 <p class="text-2xl font-bold text-gray-900 dark:text-white">Aucune formule</p>

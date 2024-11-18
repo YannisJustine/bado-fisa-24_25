@@ -13,7 +13,8 @@ class FormuleConduite extends Model
 
     protected $primaryKey = 'formule_id';
     protected $fillable = [
-        "age_requis",
+        "age_minimum",
+        "age_maximum",
         "nb_heures_conduite",
         "nb_heures_pedagogique",
         "type_permis_id"

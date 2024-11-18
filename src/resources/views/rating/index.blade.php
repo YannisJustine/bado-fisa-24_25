@@ -18,10 +18,10 @@
             </div>
         </div>
     @endif
-    <section class="bg-white py-8 antialiased dark:bg-gray-900">
-        <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
+    <section class="bg-white py-8 antialiased dark:bg-gray-900 mx-auto container">
+        <div class="px-10 2xl:px-0">
             <div class="flex items-center gap-2">
-                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Reviews</h2>
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Commentaires</h2>
 
                 <div class="mt-2 flex items-center gap-2 sm:mt-0">
                     <div class="flex items-center gap-0.5">
@@ -65,8 +65,7 @@
                         {{ $stats['averageRating'] }} out of 5</p>
                     <button type="button" data-modal-target="review-modal" data-modal-toggle="review-modal"
                         id="open-modal-btn"
-                        class="mb-2 me-2 rounded-lg bg-gray-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Write
-                        a review</button>
+                        class="mb-2 me-2 rounded-lg bg-gray-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Écrire un commentaire</button>
                 </div>
 
                 <div class="mt-6 min-w-0 flex-1 space-y-3 sm:mt-0">
@@ -86,7 +85,7 @@
                         </div>
                         <a href="#"
                             class="w-8 shrink-0 text-right text-sm font-medium leading-none text-gray-700 hover:underline dark:text-gray-500 sm:w-auto sm:text-left">{{ $stats['ratings'][5] ?? 0 }}
-                            <span class="hidden sm:inline">reviews</span></a>
+                            <span class="hidden sm:inline">avis</span></a>
                     </div>
 
                     <div class="flex items-center gap-2">
@@ -104,7 +103,7 @@
                         </div>
                         <a href="#"
                             class="w-8 shrink-0 text-right text-sm font-medium leading-none text-gray-700 hover:underline dark:text-gray-500 sm:w-auto sm:text-left">{{ $stats['ratings'][4] ?? 0 }}
-                            <span class="hidden sm:inline">reviews</span></a>
+                            <span class="hidden sm:inline">avis</span></a>
                     </div>
 
                     <div class="flex items-center gap-2">
@@ -122,7 +121,7 @@
                         </div>
                         <a href="#"
                             class="w-8 shrink-0 text-right text-sm font-medium leading-none text-gray-700 hover:underline dark:text-gray-500 sm:w-auto sm:text-left">{{ $stats['ratings'][3] ?? 0 }}
-                            <span class="hidden sm:inline">reviews</span></a>
+                            <span class="hidden sm:inline">avis</span></a>
                     </div>
 
                     <div class="flex items-center gap-2">
@@ -140,7 +139,7 @@
                         </div>
                         <a href="#"
                             class="w-8 shrink-0 text-right text-sm font-medium leading-none text-gray-700 hover:underline dark:text-gray-500 sm:w-auto sm:text-left">{{ $stats['ratings'][2] ?? 0 }}
-                            <span class="hidden sm:inline">reviews</span></a>
+                            <span class="hidden sm:inline">avis</span></a>
                     </div>
 
                     <div class="flex items-center gap-2">
@@ -159,7 +158,7 @@
                         </div>
                         <a href="#"
                             class="w-8 shrink-0 text-right text-sm font-medium leading-none text-gray-700 hover:underline dark:text-gray-500 sm:w-auto sm:text-left">{{ $stats['ratings'][1] ?? 0 }}
-                            <span class="hidden sm:inline">reviews</span></a>
+                            <span class="hidden sm:inline">avis</span></a>
                     </div>
                 </div>
             </div>

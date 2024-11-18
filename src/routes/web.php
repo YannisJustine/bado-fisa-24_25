@@ -28,8 +28,7 @@ use App\Http\Controllers\Auth\User\RegisterController as UserRegisterController;
 include("auth.php");
 
 Route::view('/', 'welcome')->name('home');
-Route::get('/ratings', [RatingController::class, 'index'])->name('rating.index');
-Route::post('/rating', [RatingController::class, 'store'])->name('rating.store');
+
 
 Route::middleware('auth:web')->group(function () {
     
@@ -45,6 +44,7 @@ Route::middleware('auth:web')->group(function () {
 
     Route::get('/candidats', Applicant::class)->name('candidats');
     Route::get('/candidats/{candidat}', [CandidatController::class, 'show'])->name('candidats.profile');
+
 });
 
 Route::middleware('auth:candidat')->group(function() {
@@ -61,7 +61,8 @@ Route::middleware('auth:candidat')->group(function() {
     Route::post('catalogue/heures_supp', [HeureSuppController::class, 'store'])->name('achat.heures_supp');
     
     Route::get('/candidats/{candidat}', [CandidatController::class, 'show'])->name('candidats.profile');
-
+    Route::get('/ratings', [RatingController::class, 'index'])->name('rating.index');
+    Route::post('/rating', [RatingController::class, 'store'])->name('rating.store');
 });
 
 

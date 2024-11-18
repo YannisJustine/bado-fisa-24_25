@@ -20,7 +20,7 @@
         </div>
     </div>
     @endif
-    <div class="grow flex" id="app">
+    <div class="grow flex flex-col" id="app">
         @yield('content')
     </div>
 
