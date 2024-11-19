@@ -1,7 +1,6 @@
 @extends('layouts.main')
 @section('content')
     @if ($errors->any())
-
         <div id="error-banner" class="flex justify-between w-full p-4 border-b bg-red-700 border border-red-400 text-red-200">
             <div class="flex items-center mx-auto">
                 <p class="flex items-center text-sm font-normal">
