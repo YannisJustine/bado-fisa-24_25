@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', 'Commentaires')
 @section('content')
     @if ($errors->any())
         <div id="error-banner" class="flex justify-between w-full p-4 border-b bg-red-700 border border-red-400 text-red-200">

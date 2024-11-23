@@ -1,11 +1,8 @@
 <?php
 
-use App\Models\Lecon;
 use App\Http\Livewire\Applicant;
 use Illuminate\Support\Facades\Route;
-use App\Notifications\EventAskedNotif;
 use App\Http\Controllers\UserController;
-use App\Notifications\EventUpdatedNotif;
 use App\Http\Controllers\FormuleController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\CandidatController;
@@ -63,27 +60,3 @@ Route::middleware('auth:candidat')->group(function() {
     Route::get('/candidats/{candidat}', [CandidatController::class, 'show'])->name('candidats.profile');
     Route::post('/rating', [RatingController::class, 'store'])->name('rating.store');
 });
-
-
-
-Route::get('/test-notification-ask', function () {
-    $lecon = Lecon::first();
-    if(!$lecon) {
-        return "Aucune leçon";
-    }
-    
-    return (new EventAskedNotif($lecon))
-                ->toMail($lecon->formateur);
-});
-
-Route::get('/test-notification-confirm', function () {
-    $lecon = Lecon::first();
-    if(!$lecon) {
-        return "Aucune leçon";
-    }
-    
-    return (new EventUpdatedNotif($lecon))
-                ->toMail($lecon->candidat);
-});
-
-

@@ -32,8 +32,17 @@ clean-db:
 stop-all:
 	docker stop `docker ps -a -q`
 
+connect-apache:
+	docker exec -it apache /bin/bash
+
+connect-postgres:
+	docker exec -it postgres /bin/bash
+
+connect-redis:
+	docker exec -it redis redis-cli
+
 clean:
-	docker rm apache postgres redis || true
-	docker rmi --force apache postgres:16 redis:7.4.1-alpine || true
+	docker rm php:8.2-apache postgres redis || true
+	docker rmi --force php:8.2-apache postgres:16 redis:7.4.1-alpine || true
 	docker volume rm --force db_data || true
 	
