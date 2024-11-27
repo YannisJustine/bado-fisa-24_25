@@ -62,10 +62,12 @@
             <div class="my-6 gap-8 sm:flex sm:items-start md:my-8">
                 <div class="shrink-0 space-y-4">
                     <p class="text-2xl font-semibold leading-none text-gray-900 dark:text-white">
-                        {{ $stats['averageRating'] }} out of 5</p>
-                    <button type="button" data-modal-target="review-modal" data-modal-toggle="review-modal"
+                        {{ $stats['averageRating'] }} sur 5</p>
+                    @auth('candidat')
+                        <button type="button" data-modal-target="review-modal" data-modal-toggle="review-modal"
                         id="open-modal-btn"
                         class="mb-2 me-2 rounded-lg bg-gray-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Écrire un commentaire</button>
+                    @endauth
                 </div>
 
                 <div class="mt-6 min-w-0 flex-1 space-y-3 sm:mt-0">
