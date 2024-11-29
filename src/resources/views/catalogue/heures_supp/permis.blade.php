@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', 'Achat heures supplémentaires ' . $typePermis->libelle)
 
 @section('content')
 

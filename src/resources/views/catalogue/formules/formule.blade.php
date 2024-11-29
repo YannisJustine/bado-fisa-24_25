@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', 'Achat formule ' . $formule->libelle)
 
 @section('content')
     @if($errors->any())
